@@ -39,7 +39,7 @@ VALUES ('861103-2438', 'Adam', 'Johnson', 'M', '1990-10-01'),
        ('120449-1008', 'John', 'Goss', 'M', '1995-10-26');
 
 INSERT INTO Courses (CourseCode, CourseName, Level, Credits)
-VALUES ('CS056', 'Database Systems', 'G1', 5),
+VALUES ('CS056', 'Database Systems', 'G1', 6),
        ('CS010', 'C++', 'U1', 5),
        ('ENG111', 'English', 'U1', 3),
        ('FIN052', 'Finance', 'G1', 5),

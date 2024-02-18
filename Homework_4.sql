@@ -140,7 +140,7 @@ WHERE StudentID NOT IN (SELECT DISTINCT StudentID
                         WHERE CourseCode = 'CS056');
 
 UPDATE Courses
-SET Credits = 6
+SET Credits = 7
 WHERE CourseCode LIKE 'CS%'
   AND Credits = 5;
 

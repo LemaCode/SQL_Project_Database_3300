@@ -2,22 +2,28 @@
 CREATE TABLE Customer
 (
     Customer_ID INT PRIMARY KEY,
-    First_Name  VARCHAR(50) NOT NULL,
-    Last_Name   VARCHAR(50)NOT NULL,
-    Password    VARCHAR(255)NOT NULL,
-    Email       VARCHAR(100)NOT NULL,
-    Address     VARCHAR(255)NOT NULL
+    First_Name  VARCHAR(50)  NOT NULL,
+    Last_Name   VARCHAR(50)  NOT NULL,
+    Password    VARCHAR(255) NOT NULL,
+    Email       VARCHAR(100) NOT NULL,
+    Address     VARCHAR(255) NOT NULL
 );
+-- Insert data into Customer table
+INSERT INTO Customer (Customer_ID, First_Name, Last_Name, Password, Email, Address)
+VALUES ();
 
 -- Create Maker table
 CREATE TABLE Maker
 (
     Maker_ID               INT PRIMARY KEY,
-    Maker_Name             VARCHAR(100)NOT NULL,
-    Country                VARCHAR(50)NOT NULL,
-    Maker_Established_Year INT NOT NULL,
+    Maker_Name             VARCHAR(100) NOT NULL,
+    Country                VARCHAR(50)  NOT NULL,
+    Maker_Established_Year INT          NOT NULL,
     Maker_Website_URL      VARCHAR(255)
 );
+-- Insert data into Maker table
+INSERT INTO Maker (Maker_ID, Maker_Name, Country, Maker_Established_Year, Maker_Website_URL)
+VALUES ();
 
 -- Create Category table
 CREATE TABLE Category
@@ -26,6 +32,9 @@ CREATE TABLE Category
     Category_Name        VARCHAR(50),
     Category_Description VARCHAR(255)
 );
+-- Insert data into Category table
+INSERT INTO Category (Category_ID, Category_Name, Category_Description)
+VALUES ();
 
 -- Create Car table
 CREATE TABLE Car
@@ -44,6 +53,10 @@ CREATE TABLE Car
     FOREIGN KEY (Maker_ID) REFERENCES Maker (Maker_ID),
     FOREIGN KEY (Model_ID) REFERENCES Model (Model_ID)
 );
+-- Insert data into Car table
+INSERT INTO Car (Car_ID, Price, Warranty, Engine_Type, Category_ID, Maker_ID, Color, Model_ID, Condition_Type,
+                 Car_Picture)
+VALUES ();
 
 -- Create Review table
 CREATE TABLE Review
@@ -57,6 +70,9 @@ CREATE TABLE Review
     FOREIGN KEY (Customer_ID) REFERENCES Customer (Customer_ID),
     FOREIGN KEY (Car_ID) REFERENCES Car (Car_ID)
 );
+-- Insert data into Review table
+INSERT INTO Review (Review_ID, Customer_ID, Car_ID, Rating, Comment, Date_Posted)
+VALUES ();
 
 -- Create Model table
 CREATE TABLE Model
@@ -69,6 +85,9 @@ CREATE TABLE Model
     Sales                    INT,
     Stock_Quantity           INT
 );
+-- Insert data into Model table
+INSERT INTO Model (Model_ID, Model_Name, Model_Year, Transmission_Type, Average_Fuel_Consumption, Sales, Stock_Quantity)
+VALUES ();
 
 -- Create Order table
 CREATE TABLE Order
@@ -87,6 +106,10 @@ CREATE TABLE Order
     FOREIGN KEY (Car_ID) REFERENCES Car (Car_ID),
     FOREIGN KEY (Salesperson_ID) REFERENCES Salesperson (Salesperson_ID)
 );
+-- Insert data into Order table
+INSERT INTO Order (Order_ID, Customer_ID, Car_ID, Salesperson_ID, Order_Date, Total_Amount, Status, Card_Number,
+                   Expiry_Date, CVC)
+VALUES ();
 
 -- Create Salesperson table
 CREATE TABLE Salesperson
@@ -97,3 +120,6 @@ CREATE TABLE Salesperson
     Email          VARCHAR(100),
     Phone_Number   VARCHAR(20)
 );
+-- Insert data into Salesperson table
+INSERT INTO Salesperson (Salesperson_ID, First_Name, Last_Name, Email, Phone_Number)
+VALUES ();

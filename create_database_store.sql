@@ -2,20 +2,20 @@
 CREATE TABLE Customer
 (
     Customer_ID INT PRIMARY KEY,
-    First_Name  VARCHAR(50),
-    Last_Name   VARCHAR(50),
-    Password    VARCHAR(255),
-    Email       VARCHAR(100),
-    Address     VARCHAR(255)
+    First_Name  VARCHAR(50) NOT NULL,
+    Last_Name   VARCHAR(50)NOT NULL,
+    Password    VARCHAR(255)NOT NULL,
+    Email       VARCHAR(100)NOT NULL,
+    Address     VARCHAR(255)NOT NULL
 );
 
 -- Create Maker table
 CREATE TABLE Maker
 (
     Maker_ID               INT PRIMARY KEY,
-    Maker_Name             VARCHAR(100),
-    Country                VARCHAR(50),
-    Maker_Established_Year INT,
+    Maker_Name             VARCHAR(100)NOT NULL,
+    Country                VARCHAR(50)NOT NULL,
+    Maker_Established_Year INT NOT NULL,
     Maker_Website_URL      VARCHAR(255)
 );
 

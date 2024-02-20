@@ -73,9 +73,8 @@ CREATE TABLE Car
     Maker_ID       INT,
     Color          VARCHAR(50),
     Model_ID       INT,
-    Condition_Type VARCHAR(10),
+    Condition_Type VARCHAR(100),
     Car_Picture    VARCHAR(255),
-    Price          DECIMAL(10, 3),
     FOREIGN KEY (Category_ID) REFERENCES Category (Category_ID),
     FOREIGN KEY (Maker_ID) REFERENCES Maker (Maker_ID),
     FOREIGN KEY (Model_ID) REFERENCES Model (Model_ID)

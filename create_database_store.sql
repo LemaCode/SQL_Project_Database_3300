@@ -67,7 +67,6 @@ VALUES (3001, 'Sedan', 'Four-door passenger car'),
 CREATE TABLE Car
 (
     Car_ID         INT PRIMARY KEY,
-    Price          DECIMAL(10, 2),
     Warranty       VARCHAR(50),
     Engine_Type    VARCHAR(50),
     Category_ID    INT,

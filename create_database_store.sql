@@ -75,6 +75,7 @@ CREATE TABLE Car
     Model_ID       INT,
     Condition_Type VARCHAR(100),
     Car_Picture    VARCHAR(255),
+    Price          DECIMAL(10, 4),
     FOREIGN KEY (Category_ID) REFERENCES Category (Category_ID),
     FOREIGN KEY (Maker_ID) REFERENCES Maker (Maker_ID),
     FOREIGN KEY (Model_ID) REFERENCES Model (Model_ID)
@@ -105,6 +106,8 @@ CREATE TABLE Review
     FOREIGN KEY (Customer_ID) REFERENCES Customer (Customer_ID),
     FOREIGN KEY (Car_ID) REFERENCES Car (Car_ID)
 );
+-- make the combination of Customer_ID and Car_ID as the primary key for the Review table,
+
 -- Insert data into Review table
 INSERT INTO Review (Review_ID, Customer_ID, Car_ID, Rating, Comment, Date_Posted)
 VALUES (5001, 1001, 4001, 5, 'Great car!', '2024-02-18'),
@@ -141,9 +144,13 @@ VALUES (6001, 'Camry', 2022, 'Automatic', 30.5, 100, 20),
        (6008, 'Altima', 2023, 'CVT', 28.4, 75, 14),
        (6009, 'Soul', 2022, 'Automatic', 26.0, 95, 16),
        (6010, 'Golf', 2023, 'Automatic', 29.6, 85, 17);
+-- sale represent the number of models sold
+-- ALTER TABLE Model
+-- DROP COLUMN Sales;
+
 
 -- Create Order table
-CREATE TABLE Order
+CREATE TABLE `order`
 (
     Order_ID       INT PRIMARY KEY,
     Customer_ID    INT,
@@ -160,7 +167,7 @@ CREATE TABLE Order
     FOREIGN KEY (Salesperson_ID) REFERENCES Salesperson (Salesperson_ID)
 );
 -- Insert data into Order table
-INSERT INTO Order (Order_ID, Customer_ID, Car_ID, Salesperson_ID, Order_Date, Total_Amount, Status, Card_Number,
+INSERT INTO `order` (Order_ID, Customer_ID, Car_ID, Salesperson_ID, Order_Date, Total_Amount, Status, Card_Number,
                    Expiry_Date, CVC)
 VALUES (7001, 1001, 4001, 1, '2024-02-20', 25000.00, 'Completed', '1234567890123456', '2025-12-31', 123),
        (7002, 1002, 4002, 2, '2024-02-21', 30000.00, 'Processing', '9876543210987654', '2024-10-31', 456),
@@ -202,7 +209,7 @@ SELECT * FROM Category;
 SELECT * FROM Car;
 SELECT * FROM Review;
 SELECT * FROM Model;
-SELECT * FROM Order;
+SELECT * FROM `order`;
 SELECT * FROM Salesperson;
 
 -- 1. Find the average rating and the total number of reviews for each car.

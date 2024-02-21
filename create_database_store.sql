@@ -221,39 +221,35 @@ VALUES (7001, 1001, 4001, 8001, '2024-02-20 12:30:00', 25000.00, 'Completed', '1
 -- ELECT * FROM `order`;
 -- ELECT * FROM Salesperson;
 
--- 1. Find the average rating and the total number of reviews for each car.
-SELECT Car.Car_ID, AVG(Review.Rating) AS Avg_Rating, COUNT(Review.Review_ID) AS Total_Reviews
+-- 1) Retrieve the details of cars along with their respective makers.
+SELECT Car.Car_ID, Car.Model_ID, Maker.Maker_Name, Model_Name, Car.Color, Car.Condition_Type, Car.Price
 FROM Car
-         INNER JOIN Review ON Car.Car_ID = Review.Car_ID
-GROUP BY Car.Car_ID;
+         INNER JOIN Maker ON Car.Maker_ID = Maker.Maker_ID
+         INNER JOIN Model ON Model.Model_ID = Car.Model_ID;
 
--- 2. Retrieve details of cars with prices higher than the average price of cars in the same category.
-# SELECT Model.Model_Name, Price, Category_ID
-# FROM Car JOIN Model ON Model.Model_ID = Car.Model_ID
-# HAVING Price > (SELECT AVG(Price) FROM Car);
+-- 2) Identify the top 5 customers with the highest number of orders.
+SELECT Customer.Customer_ID, Customer.First_Name, Customer.Last_Name, COUNT(Orders.Order_ID) AS OrderCount
+FROM Customer
+         INNER JOIN Orders ON Customer.Customer_ID = Orders.Customer_ID
+GROUP BY Customer.Customer_ID
+ORDER BY OrderCount DESC
+LIMIT 5;
 
--- 3. Retrieve details of cars with prices higher than the average price of cars in the same category.
-SELECT Car_ID, Price, Category_ID
+-- 3) List all cars with stock quantity below the average stock quantity.
+SELECT Car.Car_ID, Model_Name, Model.Stock_Quantity
 FROM Car
-WHERE Price > (SELECT AVG(Price) FROM Car);
+         INNER JOIN Model ON Car.Model_ID = Model.Model_ID
+WHERE Model.Stock_Quantity < (SELECT AVG(Stock_Quantity) FROM Model);
 
--- 4. Find makers with more than 3 cars in the database and list the count of cars for each maker.
-SELECT Maker.Maker_ID, Maker.Maker_Name, COUNT(Car.Car_ID) AS Car_Count
-FROM Maker
-         LEFT JOIN Car ON Maker.Maker_ID = Car.Maker_ID
-GROUP BY Maker.Maker_ID, Maker.Maker_Name
-HAVING COUNT(Car.Car_ID) > 3;
+-- 4) Retrieve the total sales and average price per car category, only for categories with total sales greater than 25,000.
+SELECT Category.Category_Name, SUM(Car.Price) AS TotalSales, AVG(Car.Price) AS AvgPrice
+FROM Category
+         INNER JOIN Car ON Category.Category_ID = Car.Category_ID
+GROUP BY Category.Category_Name
+HAVING TotalSales > 25000;
 
--- 5. Retrieve a list of customers and their order details, including those who haven't placed any orders.
-SELECT Car.Car_ID, Car.Model_ID, Car.Price, Review.Rating, Review.Comment
-FROM Car
-         LEFT OUTER JOIN Review ON Car.Car_ID = Review.Car_ID;
-
-
--- 2. Count the number of reviews for each car model.
-SELECT Model.Model_Name, COUNT(Review.Review_ID) AS Review_Count
-FROM Model
-         LEFT JOIN Car ON Model.Model_ID = Car.Model_ID
-         LEFT JOIN Review ON Car.Car_ID = Review.Car_ID
-GROUP BY Model.Model_ID, Model.Model_Name;
-
+-- 5) Retrieve all customers and their orders, including those who haven't placed any orders.
+SELECT Customer.Customer_ID, Customer.First_Name, Customer.Last_Name, COUNT(Orders.Order_ID) AS TotalOrders
+FROM Customer
+         LEFT JOIN Orders ON Customer.Customer_ID = Orders.Customer_ID
+GROUP BY Customer.Customer_ID, Customer.First_Name, Customer.Last_Name;

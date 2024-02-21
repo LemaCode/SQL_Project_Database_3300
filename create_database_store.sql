@@ -182,6 +182,10 @@ VALUES (4001, 25000.00, '2 years', 'V6', 3001, 2001, 'Blue', 6001, 'New', 'car1.
        (4010, 38000.00, '2 years', 'V8', 3010, 2010, 'Orange', 6010, 'Used', 'car10.jpg');
 
 
+
+
+
+
 -- Insert data into Review table
 INSERT INTO Review (Review_ID, Customer_ID, Car_ID, Rating, Comment, Date_Posted)
 VALUES (5001, 1001, 4001, 5, 'Great car!', '2024-02-18 23:12:00'),

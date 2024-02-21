@@ -32,36 +32,36 @@ CREATE TABLE Category
 CREATE TABLE Model
 (
     Model_ID                 INT PRIMARY KEY,
-    Model_Name               VARCHAR(100) NOT NULL ,
-    Model_Year               INT         NOT NULL,
-    Transmission_Type        VARCHAR(20) NOT NULL,
-    Average_Fuel_Consumption VARCHAR(50) NOT NULL,
-    Sales                    INT     NOT NULL,
-    Stock_Quantity           INT    NOT NULL
+    Model_Name               VARCHAR(100) NOT NULL,
+    Model_Year               INT          NOT NULL,
+    Transmission_Type        VARCHAR(20)  NOT NULL,
+    Average_Fuel_Consumption VARCHAR(50)  NOT NULL,
+    Sales                    INT          NOT NULL,
+    Stock_Quantity           INT          NOT NULL
 );
 
 -- Create Salesperson table
 CREATE TABLE Salesperson
 (
     Salesperson_ID INT PRIMARY KEY,
-    First_Name     VARCHAR(50) NOT NULL,
-    Last_Name      VARCHAR(50) NOT NULL,
+    First_Name     VARCHAR(50)  NOT NULL,
+    Last_Name      VARCHAR(50)  NOT NULL,
     Email          VARCHAR(100) NOT NULL,
-    Phone_Number   VARCHAR(20) NOT NULL
+    Phone_Number   VARCHAR(20)  NOT NULL
 );
 
 -- Create Car table
 CREATE TABLE Car
 (
     Car_ID         INT PRIMARY KEY,
-    Warranty       VARCHAR(10) NOT NULL DEFAULT '1 year',
-    Engine_Type    VARCHAR(10) NOT NULL,
-    Category_ID    INT NOT NULL,
-    Maker_ID       INT NOT NULL,
-    Color          VARCHAR(20) NOT NULL,
-    Model_ID       INT NOT NULL,
-    Condition_Type VARCHAR(4) NOT NULL,
-    Photo_URL    VARCHAR(255) NOT NULL ,
+    Warranty       VARCHAR(10)    NOT NULL DEFAULT '1 year',
+    Engine_Type    VARCHAR(10)    NOT NULL,
+    Category_ID    INT            NOT NULL,
+    Maker_ID       INT            NOT NULL,
+    Color          VARCHAR(20)    NOT NULL,
+    Model_ID       INT            NOT NULL,
+    Condition_Type VARCHAR(4)     NOT NULL,
+    Photo_URL      VARCHAR(255)   NOT NULL,
     Price          DECIMAL(10, 4) NOT NULL,
     FOREIGN KEY (Category_ID) REFERENCES Category (Category_ID),
     FOREIGN KEY (Maker_ID) REFERENCES Maker (Maker_ID),
@@ -72,15 +72,15 @@ CREATE TABLE Car
 CREATE TABLE Orders
 (
     Order_ID       INT PRIMARY KEY,
-    Customer_ID    INT NOT NULL,
-    Car_ID         INT NOT NULL,
-    Salesperson_ID INT NOT NULL,
+    Customer_ID    INT            NOT NULL,
+    Car_ID         INT            NOT NULL,
+    Salesperson_ID INT            NOT NULL,
     Order_Date     TIMESTAMP DEFAULT NOW(),
     Total_Amount   DECIMAL(10, 2) NOT NULL,
-    Status         VARCHAR(50)  NOT NULL,
-    Card_Number    VARCHAR(16) NOT NULL,
-    Expiry_Date    VARCHAR(5) NOT NULL,
-    CVC            INT NOT NULL,
+    Status         VARCHAR(50)    NOT NULL,
+    Card_Number    VARCHAR(16)    NOT NULL,
+    Expiry_Date    VARCHAR(5)     NOT NULL,
+    CVC            INT            NOT NULL,
     FOREIGN KEY (Customer_ID) REFERENCES Customer (Customer_ID),
     FOREIGN KEY (Car_ID) REFERENCES Car (Car_ID),
     FOREIGN KEY (Salesperson_ID) REFERENCES Salesperson (Salesperson_ID)
@@ -92,7 +92,7 @@ CREATE TABLE Review
     Review_ID   INT PRIMARY KEY,
     Customer_ID INT NOT NULL,
     Car_ID      INT NOT NULL,
-    Rating      INT     NOT NULL,
+    Rating      INT NOT NULL,
     Comment     VARCHAR(255),
     Date_Posted TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (Customer_ID) REFERENCES Customer (Customer_ID),
@@ -209,17 +209,6 @@ VALUES (7001, 1001, 4001, 8001, '2024-02-20 12:30:00', 25000.00, 'Completed', '1
        (7008, 1008, 4008, 8008, '2024-02-27 01:30:48', 32000.00, 'Pending', '9012345678901234', '12/24', 456),
        (7009, 1009, 4009, 8009, '2024-02-28 02:30:12', 26000.00, 'Completed', '2345678901234567', '06/29', 789),
        (7010, 1010, 4010, 8010, '2024-02-29 22:27:11', 38000.00, 'Processing', '6789012345678901', '02/28', 234);
-
-
--- Confirming the completion of data insertion
--- ELECT * FROM Customer;
--- ELECT * FROM Maker;
--- ELECT * FROM Category;
--- ELECT * FROM Car;
--- ELECT * FROM Review;
--- ELECT * FROM Model;
--- ELECT * FROM `order`;
--- ELECT * FROM Salesperson;
 
 -- 1) Retrieve the details of cars along with their respective makers.
 SELECT Car.Car_ID, Car.Model_ID, Maker.Maker_Name, Model_Name, Car.Color, Car.Condition_Type, Car.Price

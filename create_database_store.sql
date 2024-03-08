@@ -170,16 +170,16 @@ VALUES (8001, 'Alice', 'Johnson', 'alice@email.com', '(206) 555-1234'),
 -- Insert data into Car table
 INSERT INTO Car (Car_ID, Price, Warranty, Engine_Type, Category_ID, Maker_ID, Color, Model_ID, Condition_Type,
                  Photo_URL)
-VALUES (4001, 25000.00, '2 years', 'V6', 3001, 2001, 'Blue', 6001, 'New', 'car1.jpg'),
-       (4002, 30000.00, '3 years', 'V8', 3002, 2002, 'Red', 6002, 'Used', 'car2.jpg'),
-       (4003, 22000.00, '1 year', 'Inline-4', 3003, 2003, 'Silver', 6003, 'New', 'car3.jpg'),
-       (4004, 35000.00, '2 years', 'V8', 3004, 2004, 'Black', 6004, 'Used', 'car4.jpg'),
-       (4005, 40000.00, '3 years', 'V6', 3005, 2005, 'White', 6005, 'New', 'car5.jpg'),
-       (4006, 28000.00, '2 years', 'Inline-6', 3006, 2006, 'Gray', 6006, 'Used', 'car6.jpg'),
-       (4007, 24000.00, '1 year', 'V4', 3007, 2007, 'Green', 6007, 'New', 'car7.jpg'),
-       (4008, 32000.00, '3 years', 'V6', 3008, 2008, 'Brown', 6008, 'Used', 'car8.jpg'),
-       (4009, 26000.00, '2 years', 'Inline-4', 3009, 2009, 'Yellow', 6009, 'New', 'car9.jpg'),
-       (4010, 38000.00, '2 years', 'V8', 3010, 2010, 'Orange', 6010, 'Used', 'car10.jpg');
+VALUES (4001, 25000.00, '2 years', 'V6', 3001, 2001, 'Silver', 6001, 'New', 'https://www.motortrend.com/uploads/sites/10/2023/01/2022-toyota-camry-le-sedan-angular-front.png?fit=around%7C875:492'),
+       (4002, 30000.00, '3 years', 'V8', 3002, 2002, 'Blue', 6002, 'Used', 'https://www.motortrend.com/uploads/sites/10/2021/12/2022-ford-explorer-limited-suv-angular-front.png?fit=around%7C875:492'),
+       (4003, 22000.00, '1 year', 'Inline-4', 3003, 2003, 'Orange', 6003, 'New', 'https://www.motortrend.com/uploads/sites/5/2020/11/2022-Honda-Civic-Prototype-51.jpg?fit=around%7C875:492'),
+       (4004, 35000.00, '2 years', 'V8', 3004, 2004, 'White', 6004, 'Used', 'https://www.motortrend.com/uploads/sites/10/2023/04/2023-chevrolet-silverado-1500-work-truck-long-truck-angular-front.png?fit=around%7C875:492'),
+       (4005, 40000.00, '3 years', 'V6', 3005, 2005, 'White', 6005, 'New', 'https://www.motortrend.com/uploads/sites/10/2021/09/2022-bmw-x5-xdrive40i-xline-design-4wd-suv-angular-front.png?fit=around%7C875:492'),
+       (4006, 28000.00, '2 years', 'Inline-6', 3006, 2006, 'Black', 6006, 'Used', 'https://www.motortrend.com/uploads/sites/10/2023/08/2023-mercedes-benz-c-class-300-exclusive-sedan-angular-front.png?fit=around%7C875:492'),
+       (4007, 24000.00, '1 year', 'V4', 3007, 2007, 'Black', 6007, 'New', 'https://www.motortrend.com/uploads/sites/10/2021/11/2022-hyundai-palisade-sel-suv-angular-front.png?fit=around%7C875:492'),
+       (4008, 32000.00, '3 years', 'V6', 3008, 2008, 'White', 6008, 'Used', 'https://www.motortrend.com/uploads/2022/06/2023-Nissan-Altima-SR-2.0-VC-Turbo-13.jpg?fit=around%7C875:492'),
+       (4009, 26000.00, '2 years', 'Inline-4', 3009, 2009, 'Grey', 6009, 'New', 'https://www.motortrend.com/uploads/sites/10/2021/10/2022-kia-soul-s-5door-hatchback-angular-front.png?fit=around%7C875:492'),
+       (4010, 38000.00, '2 years', 'V8', 3010, 2010, 'Blue', 6010, 'Used', 'https://www.motortrend.com/uploads/sites/10/2023/05/2023-volkswagen-golf-r-4wd-5door-hatchback-angular-front.png?fit=around%7C875:492');
 
 
 

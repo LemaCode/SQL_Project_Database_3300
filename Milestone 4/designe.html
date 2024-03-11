@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <title>GetYourRide.Com</title>
+</head>
+
+<body>
+<header class="navbar">
+    <h1>GetYourRide | AutoShop</h1>
+    <nav class="links">
+        <ul>
+            <li><a class="active" href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="gallery">
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2023/01/2022-toyota-camry-le-sedan-angular-front.png?fit=around%7C875:492">
+        <h2>Toyota Camry 2022</h2>
+
+        <?php
+    $servername = "cssql.seattleu.edu";
+    $username = "bd_amire";
+    $password = "RLBYR2KP";
+    $dbname = "bd_amire";
+
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $sql = "SELECT * FROM Car";
+    $result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+        echo "<br>";
+        // output data of each row
+        while($row = mysqli_fetch_row($result)) {
+        echo "<br>";
+        $cols = mysqli_num_fields($result);
+        for ($i = 0; $i < $cols; $i++) {
+        echo "<br>" . $row[$i] . "<br>";
+        }
+        echo "<br>";
+        }
+        echo "<br>";
+        } else {
+        echo "0 results";
+        }
+
+        mysqli_free_result($result);
+        mysqli_close($conn);
+        ?>
+
+
+        <h2></h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2021/12/2022-ford-explorer-limited-suv-angular-front.png?fit=around%7C875:492">
+        <h2>Ford Explorer</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/5/2020/11/2022-Honda-Civic-Prototype-51.jpg?fit=around%7C875:492">
+        <h2>Honda Civic</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2023/04/2023-chevrolet-silverado-1500-work-truck-long-truck-angular-front.png?fit=around%7C875:492">
+        <h2>Astoria Collection</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2023/04/2023-chevrolet-silverado-1500-work-truck-long-truck-angular-front.png?fit=around%7C875:492">
+        <h2>Chevrolet Silverado</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2021/09/2022-bmw-x5-xdrive40i-xline-design-4wd-suv-angular-front.png?fit=around%7C875:492">
+        <h2>BMW X-5</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2023/08/2023-mercedes-benz-c-class-300-exclusive-sedan-angular-front.png?fit=around%7C875:492">
+        <h2>Mercedes Benz</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2021/11/2022-hyundai-palisade-sel-suv-angular-front.png?fit=around%7C875:492">
+        <h2>Hyundai Palisade</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/2022/06/2023-Nissan-Altima-SR-2.0-VC-Turbo-13.jpg?fit=around%7C875:492">
+        <h2>Nissan Altima</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2021/10/2022-kia-soul-s-5door-hatchback-angular-front.png?fit=around%7C875:492">
+        <h2>KIA Soul</h2>
+    </div>
+    <div class="card">
+        <img
+                src="https://www.motortrend.com/uploads/sites/10/2023/05/2023-volkswagen-golf-r-4wd-5door-hatchback-angular-front.png?fit=around%7C875:492">
+        <h2>Volkswagen Golf</h2>
+    </div>
+</section>
+
+
+</body>
+
+</html>

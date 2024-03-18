@@ -1,102 +1,102 @@
 -- Create Customer table
-CREATE TABLE Customer
-(
+CREATE TABLE Customer (
     Customer_ID INT PRIMARY KEY AUTO_INCREMENT,
-    First_Name  VARCHAR(50)  NOT NULL,
-    Last_Name   VARCHAR(50)  NOT NULL,
-    Password    VARCHAR(20)  NOT NULL,
-    Email       VARCHAR(100) NOT NULL,
-    Address     VARCHAR(50)  NOT NULL
+    First_Name VARCHAR(50) NOT NULL,
+    Last_Name VARCHAR(50) NOT NULL,
+    Password VARCHAR(20) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Address VARCHAR(50) NOT NULL
 );
 
 -- Create Maker table
-CREATE TABLE Maker
-(
-    Maker_ID               INT PRIMARY KEY AUTO_INCREMENT,
-    Maker_Name             VARCHAR(20)  NOT NULL,
-    Country                VARCHAR(50)  NOT NULL,
-    Maker_Established_Year INT          NOT NULL,
-    Maker_Website_URL      VARCHAR(255) NOT NULL
+CREATE TABLE Maker (
+    Maker_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Maker_Name VARCHAR(20) NOT NULL,
+    Country VARCHAR(50) NOT NULL,
+    Maker_Established_Year INT NOT NULL,
+    Maker_Website_URL VARCHAR(255) NOT NULL
 );
 
 
 -- Create Category table
-CREATE TABLE Category
-(
-    Category_ID          INT PRIMARY KEY,
-    Category_Name        VARCHAR(50)  NOT NULL,
+CREATE TABLE Category (
+    Category_ID INT PRIMARY KEY,
+    Category_Name VARCHAR(50) NOT NULL,
     Category_Description VARCHAR(255) NOT NULL
 );
 
 -- Create Model table
-CREATE TABLE Model
-(
-    Model_ID                 INT PRIMARY KEY,
-    Model_Name               VARCHAR(100) NOT NULL,
-    Model_Year               INT          NOT NULL,
-    Transmission_Type        VARCHAR(20)  NOT NULL,
-    Average_Fuel_Consumption VARCHAR(50)  NOT NULL,
-    Sales                    INT          NOT NULL,
-    Stock_Quantity           INT          NOT NULL
+CREATE TABLE Model (
+    Model_ID INT PRIMARY KEY,
+    Model_Name VARCHAR(100) NOT NULL,
+    Model_Year INT NOT NULL,
+    Transmission_Type VARCHAR(20) NOT NULL,
+    Average_Fuel_Consumption VARCHAR(50) NOT NULL,
+    Sales INT NOT NULL,
+    Stock_Quantity INT NOT NULL
 );
 
 -- Create Salesperson table
-CREATE TABLE Salesperson
-(
+CREATE TABLE Salesperson (
     Salesperson_ID INT PRIMARY KEY,
-    First_Name     VARCHAR(50)  NOT NULL,
-    Last_Name      VARCHAR(50)  NOT NULL,
-    Email          VARCHAR(100) NOT NULL,
-    Phone_Number   VARCHAR(20)  NOT NULL
+    First_Name VARCHAR(50) NOT NULL,
+    Last_Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Phone_Number VARCHAR(20) NOT NULL
 );
 
 -- Create Car table
-CREATE TABLE Car
-(
-    Car_ID         INT PRIMARY KEY,
-    Warranty       VARCHAR(10)    NOT NULL DEFAULT '1 year',
-    Engine_Type    VARCHAR(10)    NOT NULL,
-    Category_ID    INT            NOT NULL,
-    Maker_ID       INT            NOT NULL,
-    Color          VARCHAR(20)    NOT NULL,
-    Model_ID       INT            NOT NULL,
-    Condition_Type VARCHAR(4)     NOT NULL,
-    Photo_URL      VARCHAR(255)   NOT NULL,
-    Price          DECIMAL(10, 4) NOT NULL,
-    FOREIGN KEY (Category_ID) REFERENCES Category (Category_ID),
-    FOREIGN KEY (Maker_ID) REFERENCES Maker (Maker_ID),
-    FOREIGN KEY (Model_ID) REFERENCES Model (Model_ID)
+CREATE TABLE Car (
+    Car_ID INT PRIMARY KEY,
+    Warranty VARCHAR(10) NOT NULL DEFAULT '1 year',
+    Engine_Type VARCHAR(10) NOT NULL,
+    Category_ID INT NOT NULL,
+    Maker_ID INT NOT NULL,
+    Color VARCHAR(20) NOT NULL,
+    Model_ID INT NOT NULL,
+    Condition_Type VARCHAR(4) NOT NULL,
+    Photo_URL VARCHAR(255) NOT NULL,
+    Price DECIMAL(10 , 4 ) NOT NULL,
+    FOREIGN KEY (Category_ID)
+        REFERENCES Category (Category_ID),
+    FOREIGN KEY (Maker_ID)
+        REFERENCES Maker (Maker_ID),
+    FOREIGN KEY (Model_ID)
+        REFERENCES Model (Model_ID)
 );
 
 -- Create Order table
-CREATE TABLE Orders
-(
-    Order_ID       INT PRIMARY KEY,
-    Customer_ID    INT            NOT NULL,
-    Car_ID         INT            NOT NULL,
-    Salesperson_ID INT            NOT NULL,
-    Order_Date     TIMESTAMP DEFAULT NOW(),
-    Total_Amount   DECIMAL(10, 2) NOT NULL,
-    Status         VARCHAR(50)    NOT NULL,
-    Card_Number    VARCHAR(16)    NOT NULL,
-    Expiry_Date    VARCHAR(5)     NOT NULL,
-    CVC            INT            NOT NULL,
-    FOREIGN KEY (Customer_ID) REFERENCES Customer (Customer_ID),
-    FOREIGN KEY (Car_ID) REFERENCES Car (Car_ID),
-    FOREIGN KEY (Salesperson_ID) REFERENCES Salesperson (Salesperson_ID)
+CREATE TABLE Orders (
+    Order_ID INT PRIMARY KEY,
+    Customer_ID INT NOT NULL,
+    Car_ID INT NOT NULL,
+    Salesperson_ID INT NOT NULL,
+    Order_Date TIMESTAMP DEFAULT NOW (),
+    Total_Amount DECIMAL(10 , 2 ) NOT NULL,
+    Status VARCHAR(50) NOT NULL,
+    Card_Number VARCHAR(16) NOT NULL,
+    Expiry_Date VARCHAR(5) NOT NULL,
+    CVC INT NOT NULL,
+    FOREIGN KEY (Customer_ID)
+        REFERENCES Customer (Customer_ID),
+    FOREIGN KEY (Car_ID)
+        REFERENCES Car (Car_ID),
+    FOREIGN KEY (Salesperson_ID)
+        REFERENCES Salesperson (Salesperson_ID)
 );
 
 -- Create Review table
-CREATE TABLE Review
-(
-    Review_ID   INT PRIMARY KEY,
+CREATE TABLE Review (
+    Review_ID INT PRIMARY KEY,
     Customer_ID INT NOT NULL,
-    Car_ID      INT NOT NULL,
-    Rating      INT NOT NULL,
-    Comment     VARCHAR(255),
-    Date_Posted TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (Customer_ID) REFERENCES Customer (Customer_ID),
-    FOREIGN KEY (Car_ID) REFERENCES Car (Car_ID)
+    Car_ID INT NOT NULL,
+    Rating INT NOT NULL,
+    Comment VARCHAR(255),
+    Date_Posted TIMESTAMP DEFAULT NOW (),
+    FOREIGN KEY (Customer_ID)
+        REFERENCES Customer (Customer_ID),
+    FOREIGN KEY (Car_ID)
+        REFERENCES Car (Car_ID)
 );
 
 -- Insert data into Customer table
@@ -215,34 +215,121 @@ VALUES (7001, 1001, 4001, 8001, '2024-02-20 12:30:00', 25000.00, 'Completed', '1
        (7010, 1010, 4010, 8010, '2024-02-29 22:27:11', 38000.00, 'Processing', '6789012345678901', '02/28', 234);
 
 -- 1) Retrieve the details of cars along with their respective makers.
-SELECT Car.Car_ID, Car.Model_ID, Maker.Maker_Name, Model_Name, Car.Color, Car.Condition_Type, Car.Price
-FROM Car
-         INNER JOIN Maker ON Car.Maker_ID = Maker.Maker_ID
-         INNER JOIN Model ON Model.Model_ID = Car.Model_ID;
+SELECT 
+    Car.Car_ID,
+    Car.Model_ID,
+    Maker.Maker_Name,
+    Model_Name,
+    Car.Color,
+    Car.Condition_Type,
+    Car.Price
+FROM
+    Car
+        INNER JOIN
+    Maker ON Car.Maker_ID = Maker.Maker_ID
+        INNER JOIN
+    Model ON Model.Model_ID = Car.Model_ID;
 
 -- 2) Identify the top 5 customers with the highest number of orders.
-SELECT Customer.Customer_ID, Customer.First_Name, Customer.Last_Name, COUNT(Orders.Order_ID) AS OrderCount
-FROM Customer
-         INNER JOIN Orders ON Customer.Customer_ID = Orders.Customer_ID
+SELECT 
+    Customer.Customer_ID,
+    Customer.First_Name,
+    Customer.Last_Name,
+    COUNT(Orders.Order_ID) AS OrderCount
+FROM
+    Customer
+        INNER JOIN
+    Orders ON Customer.Customer_ID = Orders.Customer_ID
 GROUP BY Customer.Customer_ID
 ORDER BY OrderCount DESC
 LIMIT 5;
 
 -- 3) List all cars with stock quantity below the average stock quantity.
-SELECT Car.Car_ID, Model_Name, Model.Stock_Quantity
-FROM Car
-         INNER JOIN Model ON Car.Model_ID = Model.Model_ID
-WHERE Model.Stock_Quantity < (SELECT AVG(Stock_Quantity) FROM Model);
+SELECT 
+    Car.Car_ID, Model_Name, Model.Stock_Quantity
+FROM
+    Car
+        INNER JOIN
+    Model ON Car.Model_ID = Model.Model_ID
+WHERE
+    Model.Stock_Quantity < (SELECT 
+            AVG(Stock_Quantity)
+        FROM
+            Model);
 
 -- 4) Retrieve the total sales and average price per car category, only for categories with total sales greater than 25,000.
-SELECT Category.Category_Name, SUM(Car.Price) AS TotalSales, AVG(Car.Price) AS AvgPrice
-FROM Category
-         INNER JOIN Car ON Category.Category_ID = Car.Category_ID
+SELECT 
+    Category.Category_Name,
+    SUM(Car.Price) AS TotalSales,
+    AVG(Car.Price) AS AvgPrice
+FROM
+    Category
+        INNER JOIN
+    Car ON Category.Category_ID = Car.Category_ID
 GROUP BY Category.Category_Name
 HAVING TotalSales > 25000;
 
 -- 5) Retrieve all customers and their orders, including those who haven't placed any orders.
-SELECT Customer.Customer_ID, Customer.First_Name, Customer.Last_Name, COUNT(Orders.Order_ID) AS TotalOrders
-FROM Customer
-         LEFT JOIN Orders ON Customer.Customer_ID = Orders.Customer_ID
-GROUP BY Customer.Customer_ID, Customer.First_Name, Customer.Last_Name;
+SELECT 
+    Customer.Customer_ID,
+    Customer.First_Name,
+    Customer.Last_Name,
+    COUNT(Orders.Order_ID) AS TotalOrders
+FROM
+    Customer
+        LEFT JOIN
+    Orders ON Customer.Customer_ID = Orders.Customer_ID
+GROUP BY Customer.Customer_ID , Customer.First_Name , Customer.Last_Name;
+
+-- extra query
+-- Insert fake data into Customer table
+INSERT INTO Customer (First_Name, Last_Name, Password, Email, Address)
+VALUES ('John', 'Doe', 'fakepass123', 'john.fake@email.com', '456 Fake St'),
+       ('Jane', 'Smith', 'fakepass456', 'jane.fake@email.com', '789 Imaginary Ave'),
+       ('Jack', 'Ted', 'fakepass457', 'jack.fake@email.com', '790 Imaginary Ave');
+-- Insert fake data into Car table
+INSERT INTO Car (Price, Warranty, Engine_Type, Category_ID, Maker_ID, Color, Model_ID, Condition_Type,
+                 Photo_URL)
+VALUES (50000.00, '1 year', 'Legendary V8', 3001, 2001, 'Magic Blue', 6001, 'New', 'https://example.com/fake-car-image1.jpg'),
+       (60000.00, '2 years', 'Mythical V12', 3002, 2002, 'Epic Red', 6002, 'Used', 'https://example.com/fake-car-image2.jpg');
+-- Insert fake data into Orders table
+INSERT INTO Orders (Customer_ID, Car_ID, Salesperson_ID, Total_Amount, Status, Card_Number,
+                    Expiry_Date, CVC)
+VALUES (1011, 4001, 8001, 50000.00, 'Completed', '1111222233334444', '12/25', 111),
+       (1012, 4002, 8002, 60000.00, 'Processing', '4444333322221111', '11/27', 222);
+
+-- Update data in Customer table
+UPDATE Customer 
+SET 
+    First_Name = 'UpdatedJohn'
+WHERE
+    Customer_ID = 1001;
+
+-- Update data in Car table
+UPDATE Car 
+SET 
+    Price = 55000.00
+WHERE
+    Car_ID = 4001;
+
+-- Update data in Orders table
+UPDATE Orders 
+SET 
+    Total_Amount = 52000.00
+WHERE
+    Order_ID = 7001;
+
+-- Delete data from Customer table
+DELETE FROM Customer 
+WHERE
+    Customer_ID = 1011;
+
+-- Delete data from Car table
+DELETE FROM Car 
+WHERE
+    Car_ID = 4001;
+
+-- Delete data from Orders table
+DELETE FROM Orders 
+WHERE
+    Order_ID = 7001;

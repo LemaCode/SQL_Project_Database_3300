@@ -52,7 +52,7 @@ The Online Shopping Platform is a comprehensive web-based application designed t
 
 ## Contributors
 - Amaal Mire ([GitHub](https://github.com/amaalM))
-- Adam Tidjani ([GitHub](https://github.com/adamtidjani))
+- Adam Tidjani ([GitHub]([https://github.com/adamtidjani](https://github.com/AdamTij)))
 - James Hahn ([GitHub](https://github.com/jameshahn-dev))
 - Manasse Bosango ([GitHub](https://github.com/manasseb))
 
